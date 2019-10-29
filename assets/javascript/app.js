@@ -181,7 +181,13 @@ $(document).ready(function() {
     function endGame(){
         $("#question").empty();
         $("#gifs").empty();
+        if(wins>4){
+            $("#gifs").html("<img src='assets/images/chuckNorris-gif.gif'>");
+        } else {
+            $("#gifs").html("<img src='assets/images/thumbsDown.gif'>");
+        }
         $("#result").empty();
+        $("#answers").empty();
         $("#result").html("<h2>All done, here's how you did:</h2><br>");
         $("#result").append("<h2>Correct Answers: " + wins + "</h2>");
         $("#result").append("<h2>Incorrect Answers: " + losses + "</h2>");

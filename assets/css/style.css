@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    padding: 1rem 2rem;
 }
 body{
     background-color: #3B1502;
@@ -17,3 +18,21 @@ body{
 img{
     max-width: 30%;
 }
+.btn{
+    width: 30%;
+    background-color: #3B1502;
+    color: white;
+    border-style: none;
+    border-radius: 0;
+}
+.btn:hover{
+    background-color: #DAA30A;
+    color: black;
+}
+.display-4{
+    font-family: 'Fascinate Inline', cursive;
+}
+p{
+    font-family: 'Bangers', cursive;
+}
+
