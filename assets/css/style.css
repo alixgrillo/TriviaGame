@@ -12,4 +12,8 @@ body{
 }
 .row{
     color: white;
+    text-align: center;
+}
+img{
+    max-width: 30%;
 }

@@ -1,46 +1,53 @@
 $(document).ready(function() {
     var trivia = {
         questions: [one = {
-            question: "Special Agent 'James Bond' works for which secret service agency",
+            question: "Special Agent 'James Bond' works for which secret service agency?",
             answers: ["The Q", "BIA", "CDO", "MI6"],
             answerKey: 3,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/bond-correct.gif",
+            gifIncorrect: "assets/images/bond-incorrect.gif"
         },
         two = {
-            question: "What is the name of Captain Jack Sparrow's ship",
+            question: "What is the name of Captain Jack Sparrow's ship?",
             answers: ["The Black Pearl", "The Maurader", "The Jolly Roger", "The Wyndlass"],
             answerKey: 0,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/jackSparrow-correct.gif",
+            gifIncorrect: "assets/images/jackSparrow-incorrect.gif"
         },
         three = {
-            question: "Which fictional character enjoyed eating some liver, with fava beans and a nice chianti",
+            question: "Which fictional character enjoyed eating some liver, with fava beans and a nice chianti?",
             answers: ["Dr Victor Frankenstein", "Hannibal Lector", "Dr Richard Kimble", "Dr Frasier Crane"],
             answerKey: 1,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/hannibalLector-correct.gif",
+            gifIncorrect: "assets/images/hannibalLector-incorrect.gif"
         },
         four = {
-            question: "What is the character name of the main little boy who finds one of the five 'Golden Tickets' in the 1971 movie 'Willy Wonka & The Chocolate Factory'",
+            question: "What is the character name of the main little boy who finds one of the five 'Golden Tickets' in the 1971 movie 'Willy Wonka & The Chocolate Factory'?",
             answers: ["Charlie Harper", "Charlie Bucket", "Charlie McGee", "Charlie Allnut"],
             answerKey: 1,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/willyWonka-correct.gif",
+            gifIncorrect: "assets/images/willyWonka-incorrect.gif"
         },
         five = {
-            question: "What was the name of Del's pet mouse in the movie 'The Green Mile'",
+            question: "What was the name of Del's pet mouse in the movie 'The Green Mile'?",
             answers: ["Furlough",  "Templeton","Mr Jingles", "Roquefort"],
             answerKey: 2,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/greenMile-correct.gif",
+            gifIncorrect: "assets/images/greenMile-incorrect.gif"
         },
         six = {
-            question: "'Holly Golightly' is a character in what movie",
+            question: "'Holly Golightly' is a character in what movie?",
             answers: ["Breakfast at Tiffany's", "Gentlemen Prefer Blondes", "Roman Holiday",  "The Courtship of Andy Hardy"],
             answerKey: 0,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/breakfastTiffanys-correct.gif",
+            gifIncorrect: "assets/images/breakfastTiffanys-incorrect.gif"
         },
         seven = {
-            question: "In the movie 'Donnie Darko' what type of animal is his imaginary friend 'Frank'",
+            question: "In the movie 'Donnie Darko' what type of animal is his imaginary friend 'Frank'?",
             answers: ["A large spider", "A large koala bear", "A large hamster", "A large bunny rabbit"],
             answerKey: 3,
-            gif: "/assets/images/crying.gif"
+            gif: "assets/images/donnieDarko-correct.gif",
+            gifIncorrect: "assets/images/donnieDarko-incorrect.gif"
         }], 
 
         // questionOrder: [
@@ -143,23 +150,25 @@ $(document).ready(function() {
     function win(){
         wins++;
         $("#result").html("<h2>Correct!</h2>");
+        $("#gifs").html("<img src="+trivia.questions[qNum].gif+">");
         setResults();
     }
 
     function loss(){
         losses++;
         $("#result").html("<h2>Incorrect! The correct answer is "+ trivia.questions[qNum].answers[trivia.questions[qNum].answerKey] + "</h2>");
+        $("#gifs").html("<img src="+trivia.questions[qNum].gifIncorrect+">");
         setResults();
     }
 
     function timeOut(){
         unanswered++;
         $("#result").html("<h2>Out of Time! The correct answer is "+ trivia.questions[qNum].answers[trivia.questions[qNum].answerKey] + "</h2>");
+        $("#gifs").html("<img src="+trivia.questions[qNum].gifIncorrect+">");
         setResults();
     }
     function setResults(){
         $(".qbtn").css("visibility", "hidden");
-        $("#gifs").html("<img src="+trivia.questions[qNum].gif+">");
         qNum++;
         console.log(qNum);
         if (qNum === trivia.questions.length){
@@ -177,7 +186,7 @@ $(document).ready(function() {
         $("#result").append("<h2>Correct Answers: " + wins + "</h2>");
         $("#result").append("<h2>Incorrect Answers: " + losses + "</h2>");
         $("#result").append("<h2>Unanswered Questions : " + unanswered + "</h2>");
-        $("#reset").css("visibility", "visible");
+        $(".reset").css("visibility", "visible");
     }
     $(".reset").on("click", function(){
         location.reload();
