@@ -1,3 +1,15 @@
 .qbtn, .reset{
     visibility: hidden;
 }
+.jumbotron{
+    background-image: url("../images/movieReel.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+body{
+    background-color: #3B1502;
+}
+.row{
+    color: white;
+}
