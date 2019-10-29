@@ -46,9 +46,9 @@ There are no requirements for this game.
 * JQuery
 
 ## Acknowledgements
-* Thanks to google fonts for all the variations of fonts available.
-* Thanks to google for finding excellent and related gifs to use.
+* Thanks to Google fonts for all the variations of fonts available.
+* Thanks to Google for finding excellent and related gifs to use.
 
 ## License
 This project was created by [Alix Grillo](https://github.com/alixgrillo).    
-[License](https://github.com/alixgrillo/TriviaGame/LICENSE.md) 
+
