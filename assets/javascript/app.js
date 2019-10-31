@@ -73,28 +73,21 @@ $(document).ready(function() {
     var qNum;
 
     function askQuestion(index){
-        $("#question").html("<h2>"+trivia.questions[index].question+"<h2>");
-        $(".qbtn").css("visibility", "visible");
+        $("#question").html("<h2>"+trivia.questions[index].question+"<h2>"); 
         $.each(trivia.questions[index].answers, function (i, ans) { 
-            // var ansBtn = $("<div>");
-            // ansBtn.addClass("btn btn-light qbtn");
-            // ansBtn.attr("question", i);
-            // ansBtn.text(ans);
-            // $("#answers").append(ansBtn);
-            var ansBtn = $("#q"+i);
-            //ansBtn.addClass("btn btn-light qbtn");
+            var ansBtn = $("<div>");
+            ansBtn.addClass("btn btn-light qbtn");
             ansBtn.attr("question", i);
-            ansBtn.html(ans);
-            //$("#answers").append(ansBtn);
+            ansBtn.text(ans);
+            $("#answers").append(ansBtn);
+            $("#answers").append("<br>");
             qNum = index;
             //qNum = trivia.questionOrder[qNumIdx];
         });
     }
 
     function newQuestion(){
-        console.log(qNum);
-        $("#gifs").empty();
-        $("#result").empty();
+        $("#gifs, #result").empty();
         askQuestion(qNum);
         startTimer(30);
     }
@@ -113,9 +106,9 @@ $(document).ready(function() {
         $("#timer").html("<h2>Time Remaining: " + seconds + " Seconds</h2>"); 
         //  Once number hits zero...
         if (seconds === 0) {
-          //  ...run the stop function.
+          //  ... run the stop function.
           stop();
-          // INSERT FUNCTION HERE!!!
+          // run the timeout function, which will tell user that they ran out of time
           timeOut();
         }
     }
@@ -134,18 +127,18 @@ $(document).ready(function() {
         startTimer(30);
     })
 
-    $(".qbtn").on("click", function(){
-        stop();
-        var idx = $(this).attr("question");
-        console.log("button clicked", idx, $(this).attr("question"), trivia.questions[qNum].answerKey)
-        if(idx == trivia.questions[qNum].answerKey){
-            win();
-            console.log("win");
-        } else {
-            loss();
-            console.log("loss");
+    function chooseAnswer(){
+            stop();
+            var idx = $(this).attr("question");
+            console.log("button clicked", idx, $(this).attr("question"), trivia.questions[qNum].answerKey)
+            if(idx == trivia.questions[qNum].answerKey){
+                win();
+            } else {
+                loss();
+            }
         }
-    })
+
+    $(document).on("click", ".qbtn", chooseAnswer);
 
     function win(){
         wins++;
@@ -167,8 +160,9 @@ $(document).ready(function() {
         $("#gifs").html("<img src="+trivia.questions[qNum].gifIncorrect+">");
         setResults();
     }
+
     function setResults(){
-        $(".qbtn").css("visibility", "hidden");
+        $("#answers").empty();
         qNum++;
         console.log(qNum);
         if (qNum === trivia.questions.length){
@@ -179,21 +173,19 @@ $(document).ready(function() {
     }
 
     function endGame(){
-        $("#question").empty();
-        $("#gifs").empty();
+        $("#question, #result, #answers, #gifs").empty();
         if(wins>4){
             $("#gifs").html("<img src='assets/images/chuckNorris-gif.gif'>");
         } else {
             $("#gifs").html("<img src='assets/images/thumbsDown.gif'>");
         }
-        $("#result").empty();
-        $("#answers").empty();
         $("#result").html("<h2>All done, here's how you did:</h2><br>");
         $("#result").append("<h2>Correct Answers: " + wins + "</h2>");
         $("#result").append("<h2>Incorrect Answers: " + losses + "</h2>");
         $("#result").append("<h2>Unanswered Questions : " + unanswered + "</h2>");
         $(".reset").css("visibility", "visible");
     }
+
     $(".reset").on("click", function(){
         location.reload();
     })
