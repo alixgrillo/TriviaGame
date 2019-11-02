@@ -85,6 +85,8 @@ $(document).ready(function() {
     answerOrder = sortAnswers(answerOrder);
     questionOrder = sortAnswers(questionOrder);
 
+    // function to randomize the order of an array - for the number of items in an array,
+    // this will swap the index of that i with a random index of the array
     function sortAnswers(arr){
         
         for(var i=0; i<arr.length; i++){
@@ -95,11 +97,9 @@ $(document).ready(function() {
         }
         return arr;
     }
-    console.log(questionOrder);
 
     // askQuestion will display the question and create buttons for the user
     function askQuestion(index){
-        console.log(index);
         // display question
         $("#question").html("<h2>"+trivia.questions[questionOrder[index]].question+"<h2>");
         // for each answer available, create a button for the user to choose from 
@@ -126,6 +126,7 @@ $(document).ready(function() {
     function newQuestion(){
         // clear the previous question's gif and result
         $("#gifs, #result").empty();
+        answerOrder = sortAnswers(answerOrder);
         // ask a new question
         askQuestion(qNum);
         // start the timer counting down from 30 seconds
