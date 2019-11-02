@@ -1,7 +1,8 @@
 # TriviaGame
 Timed Trivia Game
 
-A little bit of random movie trivia never hurt anyone. 
+A little bit of random movie trivia never hurt anyone. Beware of trying to trick the game - the order
+of the questions and the order the answers will be randomized each time through the game!
 
 
 ## Table of Contents
