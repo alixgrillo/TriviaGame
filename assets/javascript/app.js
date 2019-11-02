@@ -57,13 +57,13 @@ $(document).ready(function() {
 
         // there are several orders that the questions can be displayed in - this 
         // adds some randomness to the game.
-        questionOrder: [
-            order0 = [0,1,2,3,4,5,6],
-            order1 = [3,6,2,1,5,0,4],
-            order2 = [1,5,2,4,3,0,6],
-            order3 = [4,2,6,1,5,3,0],
-            order4 = [5,2,4,0,1,6,3]
-        ]
+        // questionOrder: [
+        //     order0 = [0,1,2,3,4,5,6],
+        //     order1 = [3,6,2,1,5,0,4],
+        //     order2 = [1,5,2,4,3,0,6],
+        //     order3 = [4,2,6,1,5,3,0],
+        //     order4 = [5,2,4,0,1,6,3]
+        // ]
 
 
     }
@@ -76,25 +76,48 @@ $(document).ready(function() {
     var losses=0;
     var unanswered=0;
     // determine the order of the questions, which is one of the 5 options in questionOrder
-    var questionOrder = trivia.questionOrder[Math.floor(Math.random()*5)];
+    //var questionOrder = trivia.questionOrder[Math.floor(Math.random()*5)];
     // qNum will be used to keep track of which question the user is one - it will increment
     // by one, which will grab the next question number in questionOrder
     var qNum;
+    var answerOrder = [0,1,2,3];
+    var questionOrder = [0,1,2,3,4,5,6];
+    answerOrder = sortAnswers(answerOrder);
+    questionOrder = sortAnswers(questionOrder);
+
+    function sortAnswers(arr){
+        
+        for(var i=0; i<arr.length; i++){
+            var j = Math.floor(Math.random()*arr.length);
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+        return arr;
+    }
+    console.log(questionOrder);
 
     // askQuestion will display the question and create buttons for the user
     function askQuestion(index){
+        console.log(index);
         // display question
         $("#question").html("<h2>"+trivia.questions[questionOrder[index]].question+"<h2>");
         // for each answer available, create a button for the user to choose from 
-        $.each(trivia.questions[questionOrder[index]].answers, function (i, ans) { 
+        $.each(answerOrder, function (i, ans) { 
+           // create a new div for the button            
             var ansBtn = $("<div>");
+            // add the right classes for formatting
             ansBtn.addClass("btn btn-light qbtn");
-            ansBtn.attr("question", i);
-            ansBtn.text(ans);
+            // add an attribute that is the index of the original answers array - this is KEY to figuring 
+            // out the correct answer - it has to match the answer key if correct
+            ansBtn.attr("question", ans);
+            // add the text of the answer to the button
+            ansBtn.text(trivia.questions[questionOrder[index]].answers[ans]);
             // append the button to the answers div
             $("#answers").append(ansBtn);
             // add a break - this forces the buttons to be in vertical display
             $("#answers").append("<br>");
+            // this makes kicks off the qNum and ensure the questions stay in order
             qNum = index;
         });
     }
@@ -258,8 +281,9 @@ $(document).ready(function() {
         wins=0;
         losses=0;
         unanswered=0;
-        // pick a new question order
-        questionOrder = trivia.questionOrder[Math.floor(Math.random()*5)];
+        // pick a new question order and answer order
+        answerOrder = sortAnswers(answerOrder);
+        questionOrder = sortAnswers(questionOrder);
         // run startGame function
         startGame();
         
