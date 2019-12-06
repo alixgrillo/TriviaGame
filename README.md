@@ -4,14 +4,16 @@ Timed Trivia Game
 A little bit of random movie trivia never hurt anyone. Beware of trying to trick the game - the order
 of the questions and the order the answers will be randomized each time through the game!
 
+Please access the game at https://alixgrillo.github.io/TriviaGame/.
+
 
 ## Table of Contents
 * [About](#about)
 * [How to Play](#how-to-play)
+* [Technical Features](#technical-features)
 * [Requirements](#requirements)
 * [Build Tools](#build-tools)
 * [Acknowledgements](#acknowledgements)
-* [License](#license)
 
 
 ## About
@@ -38,18 +40,22 @@ will populate. The next question will automatically generate after 5 seconds.
 
 <img src="/assets/images/incorrect-answer.gif">
 
+## Technical Features
+* Leveraged `SetInterval()` method to incorporate a time element to the game. The clock starts over whenever
+an answer is chosen and the player is penalized for letting time elapse.
+* A `Math.floor(Math.random())` method is used to create random arrays controlling the question order and answer 
+order for each question so that every game will be unique to the user.
+* JQuery dynamically controls the DOM as the entire game exists in one browser.
 
 ## Requirements
 There are no requirements for this game.
 
 ## Build Tools
 * HTML/CSS
-* JQuery
+* Bootstrap 4.3.1 
+* JQuery 3.2.1
+* Google Font 
 
 ## Acknowledgements
 * Thanks to Google fonts for all the variations of fonts available.
 * Thanks to Google for finding excellent and related gifs to use.
-
-## License
-This project was created by [Alix Grillo](https://github.com/alixgrillo).    
-
